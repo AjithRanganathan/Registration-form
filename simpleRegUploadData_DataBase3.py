@@ -7,7 +7,7 @@ import pymysql
 # globally declare wb and sheet variable 
   
 # opening the existing excel file 
-wb = load_workbook('C:/Users/User/Documents/Registration-form')
+wb = load_workbook('C:/Users/User/Documents/Registration-form.xlsx')
 # wb = load_workbook('work_Book.xlsx') 
   
 #database connection
@@ -258,7 +258,7 @@ if __name__ == "__main__":
   
     address = Label(root, text="Address:", bg="light blue") 
    
-    course = Label(root, text="Course Interested:", bg="light blue") 
+    cource_intrested = Label(root, text="Course Interested:", bg="light blue") 
 
     batch_preferred= Label(root, text="Batch Preferred:", bg="light blue") 
      
@@ -269,8 +269,11 @@ if __name__ == "__main__":
     contact_person= Label(root, text="Contact Person From Besant Technologies:", bg="light blue") 
   
     counselor= Label(root, text="Counselor:", bg="light blue")
+    
     fees= Label(root, text="Fees:", bg="light blue")
+    
     comment= Label(root, text="Comment:", bg="light blue")
+    
     # grid method is used for placing 
     # the widgets at respective positions 
     # in table like structure . 
@@ -350,7 +353,7 @@ if __name__ == "__main__":
     alternate_no_field.grid(row=4, column=1, ipadx="80") 
     email_id_field.grid(row=5, column=1, ipadx="80") 
     address_field.grid(row=6, column=1, ipadx="80") 
-    course_field.grid(row=7, column=1, ipadx="80") 
+    cource_intrested_field.grid(row=7, column=1, ipadx="80") 
     batch_preferred_field.grid(row=8, column=1, ipadx="80") 
     how_you_came_to_know_field.grid(row=9,column=1,ipadx="80")
     experience_or_fresher_field.grid(row=10,column=1,ipadx="80")
