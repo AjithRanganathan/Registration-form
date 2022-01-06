@@ -1,17 +1,21 @@
 
 # import openpyxl and tkinter modules 
-from openpyxl import *
-from tkinter import *
+from openpyxl import*
+from tkinter import*
 from datetime import datetime
 import pymysql  
 # globally declare wb and sheet variable 
   
 # opening the existing excel file 
-#wb = load_workbook('C:/Users/User/Documents/Registration-form')
-wb = load_workbook('work_Book.xlsx') 
+wb = load_workbook('C:/Users/User/Documents/Registration-form')
+# wb = load_workbook('work_Book.xlsx') 
   
 #database connection
 connection = pymysql.connect(host="localhost",user="root",passwd="",database="Student")
+cursor = connection.cursor()
+
+# create  the table
+
 stdtablesql="""CREATE TABLE Besant(
 Date CHAR (20),
 Name CHAR (20),
@@ -28,7 +32,6 @@ Conselor CHAR (20),
 Fee CHAR (20),
 Comment CHAR (20))"""
 	
-cursor = connection.cursor()
 cursor.execute(stdtablesql)
 
 # create the sheet object 
@@ -85,6 +88,7 @@ def focus3(event):
   
 def focus4(event): 
     alternate_no_field.focus_set()
+    
 def focus5(event): 
     email_id_field.focus_set() 
  
@@ -126,7 +130,7 @@ def clear():
     alternate_no_field.delete(0, END)
     email_id_field.delete(0, END)
     address_field.delete(0, END)
-    cource_intrested_field_field.delete(0, END) 
+    cource_intrested_field.delete(0, END) 
     batch_preferred_field.delete(0, END)
     how_you_came_to_know_us_field.delete(0, END)
     are_you_experience_or_fresher_field.delete(0, END)
@@ -146,14 +150,20 @@ def insert():
     print (regDetails.get())      
     # if user not fill any entry 
     # then print "empty input" 
-    if (name_field.get() == "" and
+    if (date_field.get() == "" and
+        name_field.get() == "" and
         mobile_no_field.get() == "" and
         alternate_no_field.get() == "" and
-        course_field.get() == "" and
-        batch_preferred_field.get() == "" and
         email_id_field.get() == "" and
-        address_field.get() == "" and 
-        date_field.get() == ""): 
+        address_field.get() == "" and
+        cource_intrested_field.get() == "" and
+        batch_preferred_field.get() == "" and
+        how_you_came_to_know_us_field.get() == "" and
+        are_you_experience_or_fresher_field.get() == "" and
+        contact_person_from_besant_technologies_field.get() == "" and
+        conselor_field.get() == "" and
+        fee_field.get() == "" and
+        comment_field.get() == ""): 
               
         print("empty input") 
   
@@ -184,6 +194,9 @@ def insert():
         sheet.cell(row=current_row + 1, column=13).value = fees_field.get() 
         sheet.cell(row=current_row + 1, column=14).value = comment_field.get() 
 
+
+
+
 	# Data inserting into database Start
         if regDetails.get() == 1 and EnquiryDetails.get() == 1:
                 insert_reg_record = "INSERT INTO Registration(Date,Form_Number,Name,Course,Phone_Number,Email_Id,Address,Status) VALUES('%s','%s','%s','%s','%s','%s','%s','%s');"%(date_field.get(),course_field.get(),name_field.get(),mobile_no_field.get(),batch_preferred_field.get(),email_id_field.get(),address_field.get(),alternate_no_field.get())
@@ -201,9 +214,10 @@ def insert():
         if regDetails.get() == 1 or EnquiryDetails.get() == 1:
            connection.commit()
 	# Data inserting into database End
-        
+
+    
         # save the file 
-        wb.save('work_Book.xlsx') 
+        wb.save('C:/Users/User/Documents/Registration-form.xlsx') 
   
         # set focus on the name_field box 
         name_field.focus_set() 
