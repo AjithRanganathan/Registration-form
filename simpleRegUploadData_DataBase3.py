@@ -7,12 +7,29 @@ import pymysql
 # globally declare wb and sheet variable 
   
 # opening the existing excel file 
-#wb = load_workbook('//home//hakeem//Desktop//excel.xlsx')
-wb = load_workbook('excel.xlsx') 
+#wb = load_workbook('C:/Users/User/Documents/Registration-form')
+wb = load_workbook('work_Book.xlsx') 
   
 #database connection
 connection = pymysql.connect(host="localhost",user="root",passwd="",database="Student")
+stdtablesql="""CREATE TABLE Besant(
+Date CHAR (20),
+Name CHAR (20),
+Mobile_No CHAR (20),
+Alternate_No CHAR (20),
+Email_Id CHAR (20),
+Addres CHAR (20),
+Cource_intrested CHAR (20),
+Batch_preferred CHAR (20),
+How_you_came_to_know_us CHAR (20),
+Are_you_experience_or_fresher CHAR (20),
+Contact_person_from_besant_technologies CHAR (20),
+Conselor CHAR (20),
+Fee CHAR (20),
+Comment CHAR (20))"""
+	
 cursor = connection.cursor()
+cursor.execute(stdtablesql)
 
 # create the sheet object 
 sheet = wb.active 
@@ -56,60 +73,70 @@ def excel():
   
   
 # Function to set focus (cursor) 
-def focus1(event): 
-    # set focus on the mobile_no_field box 
+    # set focus on the field box
+def focus1(event):    
+    date_field.focus_set()
+    
+def focus2(event):
+    name_field.focus_set() 
+  
+def focus3(event): 
     mobile_no_field.focus_set() 
   
-  
-# Function to set focus 
-def focus2(event): 
-    # set focus on the alternate_no_field box 
-    alternate_no_field.focus_set() 
-  
-  
-# Function to set focus 
-def focus3(event): 
-    # set focus on the course_field box 
-    course_field.focus_set() 
-  
-  
-# Function to set focus 
 def focus4(event): 
-    # set focus on the batch_preferred_field box 
-    batch_preferred_field.focus_set() 
-  
-  
-# Function to set focus 
+    alternate_no_field.focus_set()
 def focus5(event): 
-    # set focus on the email_id_field box 
     email_id_field.focus_set() 
-  
-  
-# Function to set focus 
-def focus6(event): 
-    # set focus on the address_field box 
-    address_field.focus_set() 
-# Function to set focus 
+ 
+def focus6(event):
+    address_field.focus_set()
+    
 def focus7(event):
-    # set focus on the address_field box 
-    date_field.focus_set()  
-  
+    cource_intrested_field.focus_set()  
+
+def focus8(event):
+    batch_preferred_field.focus_set()
+    
+def focus9(event):
+    how_you_came_to_know_us_field.focus_set()
+    
+def focus10(event):
+    are_you_experience_or_fresher_field.focus_set()
+    
+def focus11(event):
+    contact_person_from_besant_technologies_field.focus_set()
+    
+def focus12(event):
+    conselor_field.focus_set()
+    
+def focus13(event):
+    fee_field.focus_set()
+    
+def focus14(event):
+    comment_field.focus_set()
+    
 # Function for clearing the 
 # contents of text entry boxes 
 def clear(): 
       
-    # clear the content of text entry box 
+    # clear the content of text entry box
+    date_field.delete(0, END) 
     name_field.delete(0, END) 
     mobile_no_field.delete(0, END) 
-    alternate_no_field.delete(0, END) 
-    course_field.delete(0, END) 
-    batch_preferred_field.delete(0, END) 
-    email_id_field.delete(0, END) 
-    address_field.delete(0, END) 
-    date_field.delete(0, END) 
-  
-def sub_option():
-    print (regDetails.get())
+    alternate_no_field.delete(0, END)
+    email_id_field.delete(0, END)
+    address_field.delete(0, END)
+    cource_intrested_field_field.delete(0, END) 
+    batch_preferred_field.delete(0, END)
+    how_you_came_to_know_us_field.delete(0, END)
+    are_you_experience_or_fresher_field.delete(0, END)
+    contact_person_from_besant_technologies_field.delete(0, END)
+    conselor_field.delete(0, END)
+    fee_field.delete(0, END)
+    comment_field.delete(0, END)
+
+    def sub_option():
+        print (regDetails.get())
     if regDetails.get() == 1:
     	temp = IntVar()    
     	Checkbutton(root, text="Demo", variable=temp).grid(row=11,column=1, sticky=N)
@@ -173,10 +200,10 @@ def insert():
            cursor.execute(insert_Enquiry_record)
         if regDetails.get() == 1 or EnquiryDetails.get() == 1:
            connection.commit()
-	# Data inserting into database End 
-  
+	# Data inserting into database End
+        
         # save the file 
-        wb.save('excel.xlsx') 
+        wb.save('work_Book.xlsx') 
   
         # set focus on the name_field box 
         name_field.focus_set() 
@@ -202,35 +229,29 @@ if __name__ == "__main__":
   
     excel() 
   
-    # create a Form label 
+    # create the Form labels 
     heading = Label(root, text="Besant Technologies\nEnquiry Form", fg="Red") 
   
-    # create a Date label 
     date = Label(root, text="Date:",bg="light blue" ) 
-    
-    # create a Name label 
+     
     name = Label(root, text="Name:",bg="light blue")
-    # create a Course label 
+  
     mobile_no = Label(root, text="Mobile No:", bg="light blue") 
-  
-    # create a Semester label 
+   
     alternate_no = Label(root, text="Alternate No:", bg="light blue") 
-  
-    # create a Form No. lable 
+   
     email_id = Label(root, text="Email Id:", bg="light blue") 
   
-    # create a Contact No. label 
     address = Label(root, text="Address:", bg="light blue") 
-  
-    # create a Email id label 
+   
     course = Label(root, text="Course Interested:", bg="light blue") 
-  
-    # create a address label 
+
     batch_preferred= Label(root, text="Batch Preferred:", bg="light blue") 
+     
+    how_you_came_to_know= Label(root, text="How You Came To Know Us:", bg="light blue")
     
-    # create a address label 
-    how_you_came_to_know= Label(root, text="How You Came To Know Us:", bg="light blue") 
     experience_or_fresher= Label(root, text="Are You Experience or Fresher:", bg="light blue")
+    
     contact_person= Label(root, text="Contact Person From Besant Technologies:", bg="light blue") 
   
     counselor= Label(root, text="Counselor:", bg="light blue")
@@ -277,30 +298,35 @@ if __name__ == "__main__":
     # the binding the function with the events 
   
     # whenever the enter key is pressed 
-    # then call the focus1 function 
-    name_field.bind("<Return>", focus1) 
+    # then call the focus1,2,3... function 
+    date_field.bind("<Return>", focus1) 
   
-    # whenever the enter key is pressed 
-    # then call the focus2 function 
-    mobile_no_field.bind("<Return>", focus2) 
+    name_field.bind("<Return>", focus2) 
   
-    # whenever the enter key is pressed 
-    # then call the focus3 function 
-    alternate_no_field.bind("<Return>", focus3) 
+    mobile_no_field.bind("<Return>", focus3) 
+
+    alternate_no_field.bind("<Return>", focus4) 
+   
+    email_id_field.bind("<Return>", focus5) 
   
-    # whenever the enter key is pressed 
-    # then call the focus4 function 
-    course_field.bind("<Return>", focus4) 
-  
-    # whenever the enter key is pressed 
-    # then call the focus5 function 
-    batch_preferred_field.bind("<Return>", focus5) 
-  
-    # whenever the enter key is pressed 
-    # then call the focus6 function 
-    email_id_field.bind("<Return>", focus6) 
-    date_field.bind("<Return>", focus7) 
-  
+    address_field.bind("<Return>", focus6)
+    
+    cource_intrested.bind("<Return>", focus7)
+    
+    batch_preferred_field.bind("<Return>", focus8)
+    
+    how_you_came_to_know_us.bind("<Return>", focus9)
+    
+    are_you_experience_or_fresher_field.bind("<Return>", focus10)
+    
+    contact_person_from_besant_technologies_field.bind("<Return>", focus11)
+    
+    conselor_field.bind("<Return>", focus12)
+    
+    fee_field.bind("<Return>", focus13)
+    
+    comment_field.bind("<Return>", focus14)
+    
     # grid method is used for placing 
     # the widgets at respective positions 
     # in table like structure . 
@@ -337,5 +363,6 @@ if __name__ == "__main__":
     quite.grid(row=16, column=1,sticky=N)
 
     # start the GUI 
-    root.mainloop() 
+    root.mainloop()
+    connection.close()
 
